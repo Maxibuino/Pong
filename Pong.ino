@@ -8,6 +8,10 @@ int balle_speedX = 1;
 int balle_speedY = 1;
 int balle_taille = 3;
 
+// Dimensions des deux raquettes
+int raquette_hauteur = 12;
+int raquette_largeur = 3;
+
 // Caracteristiques de la raquette1
 int raquette1_posX = 10;
 int raquette1_posY = 30;
@@ -15,10 +19,7 @@ int raquette1_posY = 30;
 // Caractéristiques de la raquette2
 int raquette2_posX = gb.display.width() - 13;
 int raquette2_posY = 30;
-
-// Dimensions des deux raquettes
-int raquette_hauteur = 12;
-int raquette_largeur = 3;
+int raquette2_centreY = raquette2_posY + raquette_hauteur / 2;
 
 // Score
 int score_gauche = 0;
@@ -40,13 +41,15 @@ void loop() {
     raquette1_posY = raquette1_posY + 1;
   }
 
-  //Contrôle de la raquette2
-  if (gb.buttons.repeat(BUTTON_A, 0)) {
-    raquette2_posY = raquette2_posY - 1;
-  }
-  if (gb.buttons.repeat(BUTTON_B, 0)) {
-    raquette2_posY = raquette2_posY + 1;
-  }
+  //IA de la raquette2
+if (balle_posY < raquette2_centreY) {
+  // Faire une chose
+  raquette2_posY = raquette2_posY - 1;
+}
+else if (balle_posY > raquette2_centreY) {
+  // Faire une autre chose
+  raquette2_posY = raquette2_posY +1;
+}
 
   balle_posX = balle_posX + balle_speedX;
   balle_posY = balle_posY + balle_speedY;
