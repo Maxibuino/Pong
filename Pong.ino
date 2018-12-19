@@ -8,10 +8,6 @@ int balle_speedX = 1;
 int balle_speedY = 1;
 int balle_taille = 3;
 
-// Dimensions des deux raquettes
-int raquette_hauteur = 12;
-int raquette_largeur = 3;
-
 // Caracteristiques de la raquette1
 int raquette1_posX = 10;
 int raquette1_posY = 30;
@@ -19,7 +15,10 @@ int raquette1_posY = 30;
 // Caractéristiques de la raquette2
 int raquette2_posX = gb.display.width() - 13;
 int raquette2_posY = 30;
-int raquette2_centreY = raquette2_posY + raquette_hauteur / 2;
+
+// Dimensions des deux raquettes
+int raquette_hauteur = 12;
+int raquette_largeur = 3;
 
 // Score
 int score_gauche = 0;
@@ -42,14 +41,12 @@ void loop() {
   }
 
   //IA de la raquette2
-if (balle_posY < raquette2_centreY) {
-  // Faire une chose
-  raquette2_posY = raquette2_posY - 1;
-}
-else if (balle_posY > raquette2_centreY) {
-  // Faire une autre chose
-  raquette2_posY = raquette2_posY +1;
-}
+if (balle_posY > raquette2_posY + raquette_hauteur / 2) {  // Si la balle est plus basse que le centre
+    raquette2_posY = raquette2_posY + 1;                     // Se déplacer vers le bas
+  } 
+  else if (balle_posY < raquette2_posY + raquette_hauteur / 2) {  // Si la balle est plus haute que le centre
+    raquette2_posY = raquette2_posY - 1;                          // Se déplacer vers le haut
+  }
 
   balle_posX = balle_posX + balle_speedX;
   balle_posY = balle_posY + balle_speedY;
